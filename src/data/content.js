@@ -1,3 +1,18 @@
+import gdg1 from '../assets/gdg1.jpg';
+import gdg2 from '../assets/gdg2.jpg';
+
+import threx1 from '../assets/Threx1.jpg';
+import threx2 from '../assets/Threx2.jpg';
+
+import pec1 from '../assets/PEC1.jpg';
+import pec2 from '../assets/PEC2.png';
+import pec3 from '../assets/PEC3.jpg';
+
+import p1 from '../assets/P1.png';
+import p2 from '../assets/p2.png';
+//import metallisenseImage from '../assets/MetalliSense.png';
+//import brailleBridgeImage from '../assets/BrailleBridge.png';
+
 export const projects = [
   {
     id: 'p1',
@@ -8,7 +23,7 @@ export const projects = [
     accent: ['#16222a', '#0c1017'],
     desc: 'An AI-powered legal document assistant that uses RAG and semantic vector search to retrieve relevant information from legal documents and generate context-aware answers to natural-language queries.',
     tech: ['Python', 'FastAPI', 'React', 'FAISS', 'LLM', 'RAG'],
-    shot: '[PROJECT_SCREENSHOT_01]',
+    shot: p1,
     caseStudy: {
       problem: 'Searching long legal documents for a specific clause or precedent is slow and error-prone when done manually.',
       solution: 'A retrieval-augmented generation system that indexes legal documents and answers natural-language questions with grounded, contextual responses.',
@@ -29,7 +44,7 @@ export const projects = [
     accent: ['#1c2a1e', '#0c1017'],
     desc: 'An AI-powered marine analytics platform that processes real-time ARGO float data for climate trend analysis and early disaster awareness through a conversational LLM interface.',
     tech: ['FastAPI', 'React', 'React Native', 'Supabase', 'PostgreSQL', 'Groq', 'Llama 3.1'],
-    shot: '[PROJECT_SCREENSHOT_02]',
+    shot: p2,
     caseStudy: {
       problem: 'ARGO oceanographic data is complex and difficult for non-technical users to access, interpret, and use for understanding marine and climate trends.',
       solution: 'A conversational AI platform that transforms complex ARGO float datasets into accessible insights through natural-language interaction across web and mobile applications.',
@@ -116,7 +131,7 @@ export const hackathons = [
     project: 'Legal Query AI',
     desc: 'A high-energy hackathon experience where our team turned an idea into a working solution under time pressure, strengthening our collaboration, problem-solving, and ability to build fast.',
     quote: '"Built. Pitched. Iterated. Won."',
-    photos: ['[HACKATHON_PHOTO_01 — Stage / Winning Moment]', '[HACKATHON_PHOTO_02 — Team Photo]', '[Certificate Placeholder]'],
+    photos: [gdg1, gdg2],
   },
   {
     result: 'SPECIAL PRIZE',
@@ -127,7 +142,7 @@ export const hackathons = [
     team: 'Autom Squad',
     project: 'MetalliSense',
     desc: 'From brainstorming ideas to refining our final pitch, every round challenged us to think sharper, build smarter, and work stronger as a team. 150 teams stepped in with bold ideas and big ambitions. With every elimination round, the competition grew tougher — and so did we.',
-    photos: ['[HACKATHON_PHOTO_03 — Demo]', '[HACKATHON_PHOTO_04 — Venue]', '[Team Photo Placeholder]'],
+    photos: [threx1, threx2],
   },
   {
     result: 'Special Track Winner',
@@ -138,7 +153,7 @@ export const hackathons = [
     team: 'Autom Squad',
     project: 'Metallisense',
     desc: 'One of the most impactful parts of the hackathon was engaging with the jury. Their sharp questions and industry-driven feedback pushed us to think beyond just “working code” and focus on scalability, reliability, and real-world adoption.',
-    photos: ['[HACKATHON_PHOTO_05 — Team at Work]', '[Project Demo Placeholder]', '[Stage Photo Placeholder]'],
+    photos: [pec1, pec2, pec3],
   },
 ];
 

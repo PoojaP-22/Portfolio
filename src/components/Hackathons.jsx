@@ -54,11 +54,38 @@ function HackathonCard({ h }) {
         <p className="ach-desc">{h.desc}</p>
         {h.quote && <p className="ach-quote">{h.quote}</p>}
       </div>
-      <div className="photo-grid">
+      {/* <div className="photo-grid">
         <div className="photo-placeholder large">{h.photos[0]}</div>
         <div className="photo-placeholder">{h.photos[1]}</div>
         <div className="photo-placeholder">{h.photos[2]}</div>
-      </div>
+      </div> */}
+
+      {/* <div className="photo-grid">
+        <div className="photo-placeholder large">
+          <img src={h.photos[0]} alt={`${h.name} photo 1`} />
+        </div>
+
+        <div className="photo-placeholder">
+          <img src={h.photos[1]} alt={`${h.name} photo 2`} />
+        </div>
+
+        <div className="photo-placeholder">
+          <img src={h.photos[2]} alt={`${h.name} photo 3`} />
+        </div>
+      </div> */}
+        <div className="photo-grid">
+          {h.photos.map((photo, index) => (
+            <div
+              className={`photo-placeholder ${index === 0 ? 'large' : ''}`}
+              key={index}
+            >
+              <img
+                src={photo}
+                alt={`${h.name} photo ${index + 1}`}
+              />
+            </div>
+          ))}
+        </div>
     </div>
   );
 }
