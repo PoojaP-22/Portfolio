@@ -9,8 +9,8 @@ import pec2 from '../assets/PEC2.png';
 import pec3 from '../assets/PEC3.jpg';
 
 import p1 from '../assets/P1.png';
-import p2 from '../assets/p2.png';
-//import metallisenseImage from '../assets/MetalliSense.png';
+import p2 from '../assets/P2.png';
+import p3 from '../assets/P3.png';
 //import brailleBridgeImage from '../assets/BrailleBridge.png';
 
 export const projects = [
@@ -86,7 +86,7 @@ export const projects = [
     accent: ['#2c2416', '#0c1017'],
     desc: 'An intelligent industrial platform designed to analyze molten metal composition and recommends optimal alloy additions to support precise furnace operations and reduce raw material waste.',
     tech: ['MERN', 'Spring Boot', 'Python', 'Machine Learning'],
-    shot: '[PROJECT_SCREENSHOT_04]',
+    shot: p3,
     caseStudy: {
       problem: 'Manufacturers need fast, reliable ways to assess metal quality during production without relying purely on manual inspection.',
       solution: 'An intelligent platform that analyzes metal quality data and surfaces decision support for manufacturing teams.',

@@ -12,8 +12,11 @@ function ProjectCard({ project, onOpen }) {
         style={{ '--pc1': project.accent[0], '--pc2': project.accent[1] }}
       >
         <span className="open-indicator">OPEN PROJECT ↗</span>
-        {/* <span className="tag">{project.shot}</span> */}
-        <img src={project.shot} alt={`${project.title} project preview`} />
+        {project.shot && !project.shot.startsWith('[') ? (
+          <img src={project.shot} alt={`${project.title} project preview`} />
+        ) : (
+          <span className="tag">{project.shot || 'PREVIEW COMING SOON'}</span>
+        )}
       </div>
       <div className="project-body">
         <span className="project-status">{project.status}</span>

@@ -47,7 +47,7 @@ function HackathonCard({ h }) {
 
         <h3 className="ach-name">{h.name}</h3>
         <div className="ach-meta">
-          <span>📅 {h.date}</span>
+          {h.date && <span>📅 {h.date}</span>}
           <span>👥 {h.team}</span>
           <span>💡 Project: {h.project}</span>
         </div>
