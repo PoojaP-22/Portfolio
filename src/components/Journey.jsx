@@ -2,44 +2,19 @@ import React from 'react';
 import useReveal from '../useReveal.js';
 import { journey } from '../data/content.js';
 
-function TimelineItem({ item }) {
-  const ref = useReveal();
-  const dotStyle = {
-    borderColor: `var(--${item.color})`,
-    boxShadow: item.glow ? `0 0 10px var(--${item.color})` : 'none',
-  };
-
-  return (
-    <div className="t-item reveal" ref={ref}>
-      <span className="t-dot" style={dotStyle} />
-      <div className="t-year">{item.year}</div>
-      <div className="t-log">
-        {item.ok ? (
-          <>
-            {item.log.split('STILL_BUILDING')[0]}
-            <span className="ok">STILL_BUILDING</span>
-          </>
-        ) : item.log}
-      </div>
-      <div className="t-desc">{item.desc}</div>
-    </div>
-  );
-}
-
 export default function Journey() {
-  const titleRef = useReveal();
-  const subRef = useReveal();
-
+  const ref = useReveal();
   return (
-    <section id="journey">
+    <section id="journey" className="section journey-section">
       <div className="wrap">
-        <div className="eyebrow">The Build Log</div>
-        <h2 className="section-title reveal" ref={titleRef}>Journey</h2>
-        <p className="section-sub reveal" ref={subRef}>A running log, most recent status at the bottom.</p>
-
-        <div className="timeline">
-          {journey.map((item) => <TimelineItem item={item} key={item.year} />)}
+        <div className="section-kicker">05 / THE JOURNEY SO FAR</div>
+        <div className="journey-layout">
+          <div className="journey-intro reveal" ref={ref}><h2 className="section-title">Always in<br /><em>progress.</em></h2><p>Every project, team, and challenge adds another layer to how I think and build.</p><div className="journey-callout">STAY CURIOUS.<br />KEEP SHIPPING.</div></div>
+          <div className="timeline">
+            {journey.map((item, i) => <article className="timeline-item" key={item.year}><span className="timeline-marker">{String(i + 1).padStart(2, '0')}</span><div><div className="timeline-year">{item.year}</div><h3>{item.log.replace(/^\[[^\]]+\] > /, '').replaceAll('_', ' ')}</h3><p>{item.desc}</p></div></article>)}
+          </div>
         </div>
+        <p className="journey-edit-note">Education and experience dates can be added here once finalised.</p>
       </div>
     </section>
   );
