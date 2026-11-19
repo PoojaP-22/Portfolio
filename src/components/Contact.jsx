@@ -7,105 +7,23 @@ export default function Contact() {
   const formRef = useReveal();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
-
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      setStatus('Please fill in all fields before sending.');
-      return;
-    }
-
     const recipient = 'pooja.dev2216@gmail.com';
-    const subject = encodeURIComponent(`Portfolio Transmission from ${form.name.trim()}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`
-    );
-
-    setStatus('Redirecting to your email client...');
+    const subject = encodeURIComponent(`Portfolio enquiry from ${form.name.trim()}`);
+    const body = encodeURIComponent(`Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\n\nMessage:\n${form.message.trim()}`);
+    setStatus('Opening your email application…');
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
   };
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="section contact-section">
       <div className="wrap">
-        <div className="eyebrow">Connection Request</div>
-        <h2 className="section-title reveal" ref={titleRef}>Let&apos;s build something worth shipping.</h2>
-
+        <div className="section-kicker">06 / SAY HELLO</div>
+        <h2 className="section-title reveal" ref={titleRef}>Have a good problem?<br /><em>Let’s work on it.</em></h2>
         <div className="contact-grid">
-          <div className="reveal" ref={leftRef}>
-            <div className="terminal">
-              <div className="terminal-bar"><i /><i /><i /><span>connection.sh</span></div>
-              <div className="terminal-body">
-                <div className="line show">&gt; connection_request received</div>
-                <div className="line show">&gt; target: pooja.dev2216@gmail.com</div>
-                {status ? (
-                  <div className="line show ok">&gt; {status}</div>
-                ) : (
-                  <div className="line show">&gt; awaiting_message...<span className="cursor" /></div>
-                )}
-              </div>
-            </div>
-            <div className="contact-links">
-              <a href="mailto:pooja.dev2216@gmail.com" className="contact-link">
-                <span className="k">Email</span>
-                <span className="v">pooja.dev2216@gmail.com</span>
-              </a>
-              <a href="https://github.com/PoojaP-22" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span className="k">GitHub</span>
-                <span className="v">https://github.com/PoojaP-22</span>
-              </a>
-              <a href="https://www.linkedin.com/in/poojap22/" target="_blank" rel="noopener noreferrer" className="contact-link">
-                <span className="k">LinkedIn</span>
-                <span className="v">https://www.linkedin.com/in/poojap22/</span>
-              </a>
-              <a href="#contact" className="contact-link">
-                <span className="k">Resume</span>
-                <span className="v">Available on Request ↓</span>
-              </a>
-            </div>
-          </div>
-
-          <form className="reveal" ref={formRef} onSubmit={handleSubmit}>
-            <div className="form-field">
-              <label htmlFor="contact-name">Name</label>
-              <input
-                id="contact-name"
-                type="text"
-                placeholder="Your name"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="contact-email">Email</label>
-              <input
-                id="contact-email"
-                type="email"
-                placeholder="you@gmail.com"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="contact-message">Message</label>
-              <textarea
-                id="contact-message"
-                placeholder="What are we building?"
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-              />
-            </div>
-            <button className="send-btn" type="submit">Send Transmission →</button>
-            {status && (
-              <p style={{ marginTop: '12px', fontSize: '12px', color: 'var(--cyan)', fontFamily: 'var(--font-mono)' }}>
-                {status}
-              </p>
-            )}
-          </form>
+          <div className="contact-intro reveal" ref={leftRef}><p>I’m interested in software engineering internships and opportunities to contribute to thoughtful, user-focused products. I’d love to hear about your team, project, or open role.</p><div className="contact-links"><a href="mailto:pooja.dev2216@gmail.com"><span>Email</span><strong>pooja.dev2216@gmail.com ↗</strong></a><a href="https://github.com/PoojaP-22" target="_blank" rel="noreferrer"><span>GitHub</span><strong>github.com/PoojaP-22 ↗</strong></a><a href="https://www.linkedin.com/in/poojap22/" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>Connect professionally ↗</strong></a><div className="resume-reminder"><span>RESUME</span><strong>Add your current PDF before publishing</strong></div></div></div>
+          <form className="contact-form reveal" ref={formRef} onSubmit={handleSubmit}><label>Your name<input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="How should I address you?" /></label><label>Email address<input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" /></label><label>Message<textarea required rows="5" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} placeholder="Tell me a little about the opportunity…" /></label><button className="button button-primary" type="submit">Send an email <span>↗</span></button>{status && <p className="form-status">{status}</p>}</form>
         </div>
       </div>
     </section>

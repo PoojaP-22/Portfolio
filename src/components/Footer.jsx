@@ -1,23 +1,5 @@
 import React from 'react';
 
 export default function Footer() {
-  return (
-    <footer>
-      <div className="wrap">
-        <div className="footer-row">
-          <span className="footer-text">BUILT WITH CODE, CURIOSITY &amp; TOO MANY DEBUGGING SESSIONS.</span>
-          <span className="footer-text">© 2026 Pooja P.</span>
-        </div>
-        <div className="walker-track">
-          <svg className="walker" viewBox="0 0 8 10" shapeRendering="crispEdges">
-            <rect x="2" y="0" width="4" height="4" fill="#e7b895" />
-            <rect x="1" y="0" width="6" height="2" fill="#241a14" />
-            <rect x="2" y="4" width="4" height="4" fill="#49d9c6" />
-            <rect x="1" y="8" width="2" height="2" fill="#161b22" />
-            <rect x="5" y="8" width="2" height="2" fill="#161b22" />
-          </svg>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="site-footer"><div className="wrap footer-inner"><a className="footer-brand" href="#home">P<span>.</span></a><p>Designed with intention. Built with curiosity.</p><div><a href="https://github.com/PoojaP-22" target="_blank" rel="noreferrer">GITHUB ↗</a><a href="https://www.linkedin.com/in/poojap22/" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="mailto:pooja.dev2216@gmail.com">EMAIL ↗</a></div><small>© {new Date().getFullYear()} Pooja P. · All rights reserved.</small></div></footer>;
 }

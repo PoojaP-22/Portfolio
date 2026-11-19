@@ -1,95 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useReveal from '../useReveal.js';
 import { projects } from '../data/content.js';
 
-function ProjectCard({ project, onOpen }) {
-  const ref = useReveal();
-  return (
-    <article className="project-card reveal" ref={ref} onClick={() => onOpen(project)}>
-      <div className="browser-bar"><i /><i /><i /><span className="url">{project.url}</span></div>
-      <div
-        className="project-preview"
-        style={{ '--pc1': project.accent[0], '--pc2': project.accent[1] }}
-      >
-        <span className="open-indicator">OPEN PROJECT ↗</span>
-        {project.shot && !project.shot.startsWith('[') ? (
-          <img src={project.shot} alt={`${project.title} project preview`} />
-        ) : (
-          <span className="tag">{project.shot || 'PREVIEW COMING SOON'}</span>
-        )}
-      </div>
-      <div className="project-body">
-        <span className="project-status">{project.status}</span>
-        <h3 className="project-title">{project.title}</h3>
-        <div className="project-cat">{project.cat}</div>
-        <p className="project-desc">{project.desc}</p>
-        <div className="tech-row">
-          {project.tech.map((t) => <span className="tech-chip" key={t}>{t}</span>)}
-        </div>
-        <div className="project-actions">
-          <span className="mini-btn primary">Case Study</span>
-          <span className="mini-btn">GitHub</span>
-          <span className="mini-btn">Live Demo</span>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function ProjectModal({ project, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
-
-  if (!project) return null;
-  const c = project.caseStudy;
-
-  return (
-    <div className="modal-overlay open" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="modal">
-        <div className="modal-head">
-          <div>
-            <h3>{project.title}</h3>
-            <div className="project-cat">{project.cat}</div>
-          </div>
-          <button className="modal-close" onClick={onClose}>✕</button>
-        </div>
-        <div className="modal-body">
-          <div className="modal-block"><h4>Problem</h4><p>{c.problem}</p></div>
-          <div className="modal-block"><h4>Solution</h4><p>{c.solution}</p></div>
-          <div className="modal-block"><h4>Architecture</h4><p>{c.architecture}</p></div>
-          <div className="modal-block"><h4>Technology</h4><p>{c.technology}</p></div>
-          <div className="modal-block"><h4>Challenges</h4><p>{c.challenges}</p></div>
-          <div className="modal-block"><h4>Results</h4><p>{c.results}</p></div>
-          <div className="modal-block"><h4>Future Improvements</h4><p>{c.future}</p></div>
-        </div>
-      </div>
-    </div>
-  );
+const labels = ['All work', 'AI & data', 'Full-stack', 'Accessibility'];
+function categoryFor(project) {
+  if (/Braille/i.test(project.title)) return 'Accessibility';
+  if (/Legal|Float/i.test(project.title)) return 'AI & data';
+  return 'Full-stack';
 }
 
 export default function Projects() {
-  const [active, setActive] = useState(null);
   const titleRef = useReveal();
-  const subRef = useReveal();
+  const [filter, setFilter] = useState('All work');
+  const [selected, setSelected] = useState(null);
+  const visible = projects.filter(p => filter === 'All work' || categoryFor(p) === filter);
 
   return (
-    <section id="projects">
+    <section id="projects" className="section projects-section">
       <div className="wrap">
-        <div className="eyebrow">Projects // Built In The Real World</div>
-        <h2 className="section-title reveal" ref={titleRef}>Case studies, not just repos.</h2>
-        <p className="section-sub reveal" ref={subRef}>Four products spanning AI, Sustainability, Industrial Machine Learning, and Accessibility — each built to solve a problem I actually cared about.</p>
-
+        <div className="section-kicker">02 / SELECTED WORK</div>
+        <div className="section-heading-row reveal" ref={titleRef}>
+          <div><h2 className="section-title">Projects with a<br /><em>purpose behind them.</em></h2><p className="section-sub">A selection of products and prototypes I’ve helped design and build.</p></div>
+          <span className="heading-index">PORTFOLIO / 2026</span>
+        </div>
+        <div className="project-filters" role="group" aria-label="Filter projects">
+          {labels.map(label => <button key={label} className={filter === label ? 'active' : ''} onClick={() => setFilter(label)}>{label}</button>)}
+        </div>
         <div className="project-grid">
-          {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} onOpen={setActive} />
+          {visible.map((project, index) => (
+            <article className="project-card" key={project.id}>
+              <div className="project-visual">
+                <img src={project.shot} alt={`${project.title} application preview`} loading="lazy" />
+                <span className="project-number">0{index + 1}</span>
+                <span className="project-category">{categoryFor(project)}</span>
+              </div>
+              <div className="project-content">
+                <div className="project-title-row"><h3>{project.title}</h3><span className="project-status">{project.status?.replace('● ', '')}</span></div>
+                <p>{project.desc}</p>
+                <div className="project-tech">{project.tech.slice(0, 6).map(tech => <span key={tech}>{tech}</span>)}</div>
+                <div className="project-footer"><button className="text-link" onClick={() => setSelected(project)}>View case study <span>↗</span></button>{project.url && !project.url.includes('[') && <span className="project-domain">{project.url}</span>}</div>
+              </div>
+            </article>
           ))}
         </div>
       </div>
-
-      <ProjectModal project={active} onClose={() => setActive(null)} />
+      {selected && <div className="modal-backdrop" role="presentation" onClick={() => setSelected(null)}><section className="case-modal" role="dialog" aria-modal="true" aria-labelledby="case-title" onClick={e => e.stopPropagation()}><button className="modal-close" onClick={() => setSelected(null)} aria-label="Close case study">×</button><div className="section-kicker">PROJECT CASE STUDY</div><h2 id="case-title">{selected.title}</h2><p className="modal-intro">{selected.desc}</p>{Object.entries(selected.caseStudy || {}).map(([key, value]) => <div className="case-block" key={key}><h3>{key}</h3><p>{value}</p></div>)}<div className="project-tech">{selected.tech.map(t => <span key={t}>{t}</span>)}</div></section></div>}
     </section>
   );
 }
